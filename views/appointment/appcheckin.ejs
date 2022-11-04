@@ -1,0 +1,12 @@
+<% if(renderData == 1) { %>
+    <i class="fa-solid fa-check fa-2xl"></i><span>User have appointment today</span>
+    <p class="lead mt-5">Please Enter user dose to complete check in process</p>
+    <label for="dose_id">User dose:</label>
+    <input type="text" class="form-control" placeholder="Enter user dose" id="dose_id">
+    <button type="button" class="btn btn-primary mt-2" id="doseId">Submit</button>
+<% } else { %>
+    <i class="fa-solid fa-xmark fa-2xl"></i><span>User do not have appointment today</span>
+<% } %>
+
+    
+    

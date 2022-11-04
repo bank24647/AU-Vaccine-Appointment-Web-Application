@@ -1,0 +1,31 @@
+
+<% if(renderData == 1) { %>
+    <p class="lead mt-5">Please Enter vaccine lot and vaccine serial number to complete check out process</p>
+    <label for="lot_id">Vaccine Lot:</label>
+    <input type="text" class="form-control" placeholder="Enter vaccine lot" id="lot_id">
+    <label for="serial_id">Vaccine Serial:</label>
+    <input type="text" class="form-control" placeholder="Enter vaccine serial" id="serial_id">
+    <a href="#checklotandserial" class="btn btn-primary mt-2" data-toggle="modal" id="dislns">Submit</a>
+    <div class="modal fade" id="checklotandserial">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Please confirm your vaccine lot and vaccine id</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h6>Vaccine lot no.</h6>
+                    <p id="vacclot"></p>
+                    <h6>Vaccine serial no.</h6>
+                    <p id="vaccserial"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="lotAndSerial">Confirm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% } else { %>
+    <p class="lead mt-5">User not found</p>
+<% } %>

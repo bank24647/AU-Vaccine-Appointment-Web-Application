@@ -1,0 +1,195 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Report</h1>
+</div>
+<div class="container-fluid">
+    <button type="button" class="btn btn-primary mt-2" onclick="attcome()"><b>SHOW/HIDE</b> attendant Report - come</button><br>
+    <button type="button" class="btn btn-primary mt-2" onclick="attnotcome()"><b>SHOW/HIDE</b> attendant Report - did not come</button><br>
+    <button type="button" class="btn btn-primary mt-2" onclick="inf()"><b>SHOW/HIDE</b> infect status Report</button><br>
+    <button type="button" class="btn btn-primary mt-2" onclick="vacc()"><b>SHOW/HIDE</b> vaccination status Report</button>
+</div>
+<!--Attendant - Come-->
+<div id="attcome" style="display: none" class="mt-3">
+    <h5 class="text-center">Attendant Report - Come</h5>
+    <table id="attcome_table" class="table table-light table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Appointment ID</th>
+                <th scope="col">Appointment Date</th>
+                <th scope="col">AU ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">Vaccine Name</th>
+                <th scope="col">Vaccine Lot</th>
+                <th scope="col">Vaccine Serial</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<!--Attendant - Not Come-->
+<div id="attnotcome" style="display: none" class="mt-3">
+    <h5 class="text-center">Attendant Report - Did not come</h5>
+    <table id="attnotcome_table" class="table table-light table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Appointment Date</th>
+                <th scope="col">AU ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Phone No.</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<!--Infect status-->
+<div id="inf" style="display: none" class="mt-3">
+    <h5 class="text-center">Infect status report</h5>
+    <table id="inf_table" class="table table-light table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Date</th>
+                <th scope="col">AU ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Surname</th>
+                <th scope="col">Status</th>
+                <th scope="col">Type</th>
+                <th scope="col">Phone No.</th>
+                <th scope="col">ATK image</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<!--Vaccine status-->
+<div id="vacc" style="display: none" class="mt-3">
+    <h5 class="text-center">Vaccine status report</h5>
+    <table id="vacc_table" class="table table-light table-bordered table-hover">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">Appointment ID</th>
+                <th scope="col">Appointment Date</th>
+                <th scope="col">Vaccine Name</th>
+                <th scope="col">Hospital</th>
+                <th scope="col">Received Vacccine</th>
+                <th scope="col">Remaining Vaccine</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<!--DataTable-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<script>
+    function attcome() {
+        var attcome = document.getElementById('attcome');
+        var data;
+        if (attcome.style.display === "none") {
+            attcome.style.display = "block";
+        } else {
+            attcome.style.display = "none";
+        }
+    };
+    function attnotcome() {
+        var attnotcome = document.getElementById('attnotcome');
+        var data;
+        if (attnotcome.style.display === "none") {
+            attnotcome.style.display = "block";
+        } else {
+            attnotcome.style.display = "none";
+        }
+    };
+    function inf() {
+        var inf = document.getElementById('inf');
+        var data;
+        if (inf.style.display === "none") {
+            inf.style.display = "block";
+        } else {
+            inf.style.display = "none";
+        }
+    };
+    function vacc() {
+        var vacc = document.getElementById('vacc');
+        var data;
+        if (vacc.style.display === "none") {
+            vacc.style.display = "block";
+        } else {
+            vacc.style.display = "none";
+        }
+    };
+    $(document).ready(function () {
+        //display att come list table
+        $('#attcome_table').DataTable({
+            "ajax": {
+                "url": "http://localhost:3000/appointment/attcome",
+                "type": "GET",
+            },
+            columns: [
+                { data: 'app_id' },
+                { data: 'app_date' },
+                { data: 'user_id' },
+                { data: 'user_name' },
+                { data: 'user_surname' },
+                { data: 'user_phone' },
+                { data: 'vacc_name' },
+                { data: 'vacc_lot' },
+                { data: 'vacc_serial' },
+            ],
+        });
+        $('#attnotcome_table').DataTable({
+            "ajax": {
+                "url": "http://localhost:3000/appointment/attnotcome",
+                "type": "GET",
+            },
+            columns: [
+                { data: 'app_date' },
+                { data: 'user_id' },
+                { data: 'user_name' },
+                { data: 'user_surname' },
+                { data: 'user_phone' },
+            ],
+        });
+        $('#inf_table').DataTable({
+            "ajax": {
+                "url": "http://localhost:3000/appointment/inftable",
+                "type": "GET",
+            },
+            columns: [
+                { data: 'inf_date' },
+                { data: 'user_id' },
+                { data: 'user_name' },
+                { data: 'user_surname' },
+                { data: 'user_status' },
+                { data: 'user_type' },
+                { data: 'user_phone' },
+                { data: 'img_name',
+                "render": function(data, type, row, meta){
+                    return '<a href="../img/infImg/'+data+'"/>Click to show image</a>';
+                }},
+            ],
+        });
+        $('#vacc_table').DataTable({
+            "ajax": {
+                "url": "http://localhost:3000/appointment/vacctable",
+                "type": "GET",
+            },
+            columns: [
+                { data: 'app_id' },
+                { data: 'app_date' },
+                { data: 'vacc_name' },
+                { data: 'vacc_hospital' },
+                { data: 'vacc_receive' },
+                { data: 'vacc_amount' },
+            ],
+        });
+    });
+
+</script>

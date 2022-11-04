@@ -1,0 +1,160 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Create Appointment</h1>
+</div>
+<p class="lead text-center">In case of hospital provided more than one of vaccine brand , please create
+    seperate appointment for each vaccine brand</p>
+<div class="container-fluid">
+    <form>
+        <!--Hospital Name-->
+        <div class="form-group">
+            <label for="hos_name">Hospital Name:</label>
+            <select class="form-control" id="hos_name" name="hos_name">
+                <option>Bang Bo Hospital</option>
+                <option>Bang Na 2 Hospital</option>
+                <option>Bangplee Hospital</option>
+                <option>Bang Sao Thong Hospital</option>
+                <option>Chularat 1 Suvarnabhumi Hospital</option>
+                <option>Chularat 3 International Hospital</option>
+                <option>Chularat 5 Hospital</option>
+                <option>Ruamchai Pracharug Hospital</option>
+            </select>
+        </div>
+        <!--Vaccine Name-->
+        <div class="form-group">
+            <label for="vacc_name">Vaccine Name:</label>
+            <select class="form-control" id="vacc_name" name="vacc_name">
+                <option>AstraZeneca</option>
+                <option>Moderna</option>
+                <option>Pfizer</option>
+                <option>Sinopharm</option>
+                <option>Sinovac</option>
+            </select>
+        </div>
+        <!--Vaccine Amount-->
+        <div class="form-group">
+            <label for="vacc_amount">Vaccine Amount:</label>
+            <input type="text" class="form-control" placeholder="Enter amount of vaccine available" id="vacc_amount"
+                name="vacc_amount">
+        </div>
+        <!--Appointment Date-->
+        <div class="form-group">
+            <label for="app_date">Appointment Date(Cannot pick past date):</label>
+            <input type="date" class="form-control date" id="app_date" name="app_date">
+        </div>
+        <!--Appointment time-->
+        <div class="form-group">
+            <label for="app_time">Appointment Time:</label>
+            <select type="text" class="form-control" id="app_time" name="app_time">
+                <option>9.00 - 12.00</option>
+                <option>13.30 - 16.30</option>
+                <option>9.00 - 12.00 and 13.30 - 16.30</option>
+            </select>
+        </div>
+        <!--Appointment location-->
+        <div class="form-group">
+            <label for="app_location">Appointment Location:</label>
+            <select type="text" class="form-control" id="app_location" name="app_location">
+                <option>First floor, CL Center</option>
+                <option>First floor, MSM building</option>
+                <option>First floor, MSE building</option>
+                <option>AU Mall</option>
+                <option>Jhon Paul II Sport Center</option>
+            </select>
+        </div>
+        <a href="#crappmodal" class="btn btn-primary" data-toggle="modal" id="disbtn">Create Appointment</a>
+</div>
+</form>
+<!-- Booking Modal have vaccine-->
+<div class="modal fade" id="crappmodal">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please check appoinment information again before submit</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h6>Hospital Name:</h6>
+                <p id="dishos"></p>
+                <h6>Vaccine Name:</h6>
+                <p id="disvaccn"></p>
+                <h6>Vaccine Amount:</h6>
+                <p id="disvacca"></p>
+                <h6>Appointment Date:</h6>
+                <p id="disappd"></p>
+                <h6>Appointment Time:</h6>
+                <p id="disappt"></p>
+                <h6>Appointment Location:</h6>
+                <p id="disappl"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="crappbtn">Confirm</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        //Create Appoinment
+        const hos_name = document.getElementById("hos_name");
+        const vacc_name = document.getElementById("vacc_name");
+        const vacc_amount = document.getElementById("vacc_amount");
+        const app_date = document.getElementById("app_date");
+        const app_time = document.getElementById("app_time");
+        const app_location = document.getElementById("app_location");
+        const crappbtn = document.getElementById("crappbtn");
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0 so need to add 1 to make it 1!
+        var yyyy = today.getFullYear();
+        if (dd < 10) dd = '0' + dd;
+        if (mm < 10) mm = '0' + mm;
+        today = yyyy + '-' + mm + '-' + dd;
+        crappbtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const hos = hos_name.value;
+            const vaccn = vacc_name.value;
+            const vacca = vacc_amount.value;
+            const appd = app_date.value;
+            const appt = app_time.value;
+            const appl = app_location.value;
+            console.log(today)
+            console.log(appd)
+            if (appd <= today) {
+                alert('Date must be at least tomorrow, cannot set date to today or past date!')
+            } else {
+                let response = await axios.post("/appointment/create", {
+                    vacc_hospital: hos,
+                    vacc_name: vaccn,
+                    vacc_amount: vacca,
+                    app_date: appd,
+                    app_time: appt,
+                    app_location: appl,
+                });
+                if (response.data.status == 'SUCCESS') {
+                    window.location.href = "/admin/adapplist";
+                }
+                return false;
+            }
+        });
+        //Display info before submit
+        disbtn.addEventListener("click", async (e) => {
+            const dishos = document.getElementById("dishos");
+            const disvaccn = document.getElementById("disvaccn");
+            const disvacca = document.getElementById("disvacca");
+            const disappd = document.getElementById("disappd");
+            const disappt = document.getElementById("disappt");
+            const disappl = document.getElementById("disappl");
+            const disbtn = document.getElementById("disbtn");
+            dishos.innerText = hos_name.value;
+            disvaccn.innerText = vacc_name.value;
+            disvacca.innerText = vacc_amount.value;
+            disappd.innerText = app_date.value;
+            disappt.innerText = app_time.value;
+            disappl.innerText = app_location.value;
+        });
+    });
+</script>

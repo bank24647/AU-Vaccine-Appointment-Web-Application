@@ -1,0 +1,10 @@
+<% renderData.forEach((data) => { %>
+<div class="card mb-3">
+    <div class="card-body">
+        <img class="card-imag-top img-fluid" src="img/article/<%= data.art_image_name %>"
+            alt="article"><br>
+        <p class="font-weight-bold"><%= data.art_title %></p>
+        <p class="card-text"><%= data.art_body %></p>
+    </div>
+</div>
+<% }) %>

@@ -1,0 +1,117 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Article List</h1>
+</div>
+<div class="container-fluid">
+<!--APP TABLE -->
+    <table id="art_table" class="table table-light table-bordered table-hover ">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Title</th>
+                <th scope="col">Body</th>
+                <th scope="col">Image</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <!-- Delete and modify article-->
+    <p class="lead mt-5">Please input article id that you want to modify</p>
+    <div class="form-group">
+        <label for="searchID">Article ID:</label>
+        <input type="text" class="form-control" placeholder="Enter Article ID" id="searchID"
+            name="searchID">
+        <button type="button" class="btn btn-primary mt-2" id="searchArt">Submit</button>
+    </div>
+    <p class="lead mt-2">After submit article id, the modify data will appear below</p>
+    <div id="displayModify">
+    </div>
+</div>
+<!--DataTable-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+<script>
+    $(document).ready(function () {
+        //display article list table
+        var data;
+        $('#art_table').DataTable({
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            "ajax": {
+                "url": "http://localhost:3000/article/arttable",
+                "type": "GET",
+            },
+            columns: [
+                { data: 'art_id' },
+                { data: 'art_date' },
+                { data: 'art_title' },
+                { data: 'art_body' },
+                { data: 'art_image_name',
+                "render": function(data, type, row, meta){
+                    return '<a href="../img/article/'+data+'"/>Click to show image</a>';
+                }},
+            ],
+        });
+        //Display and modify article detail
+        const inputId = document.getElementById('searchID');
+        const sbtn = document.getElementById('searchArt');
+        sbtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const searchId = inputId.value;
+            axios.post("/article/artmodify", {
+                art_id: searchId,
+            })
+                .then((response) => {
+                    displayModify.innerHTML = response.data;
+                    //delete article
+                    const btndelete = document.getElementById('btndelete');
+                    btndelete.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        const searchId = inputId.value;
+                        console.log(searchId);
+                        axios.post("/article/artdelete", {
+                            art_id: searchId,
+                        })
+                            .then((response) => {
+                                alert(response.data);
+                                window.location.reload();
+                            });
+                    });
+                    //change article title
+                    const btntitle = document.getElementById('btntitle');
+                    const inputtitle = document.getElementById('art_title');
+                    btntitle.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        const searchId = inputId.value;
+                        const ctitle = inputtitle.value;
+                        axios.post("/article/arttitle", {
+                            art_id: searchId,
+                            art_title: ctitle,
+                        })
+                            .then((response) => {
+                                alert(response.data);
+                                window.location.reload();
+                            });
+                    });
+                    //change article body
+                    const btnbody = document.getElementById('btnbody');
+                    const inputbody = document.getElementById('art_body');
+                    btnbody.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        const searchId = inputId.value;
+                        const cbody = inputbody.value;
+                        axios.post("/article/artbody", {
+                            art_id: searchId,
+                            art_body: cbody,
+                        })
+                            .then((response) => {
+                                alert(response.data);
+                                window.location.reload();
+                            });
+                    });
+                });
+        });
+    });
+</script>

@@ -1,0 +1,328 @@
+<title>Assumption University Vaccine Booking System</title>
+<link rel="stylesheet" href="css/template.css">
+<body>
+    <div class="wrapper">
+        <!--Side Bar-->
+        <nav id="sidebar">
+            <!--Side Bar Header-->
+            <div class="sidebar-header d-flex align-items-center justify-content-center">
+                <img src="img/logo.png" class="img-fluid mr-3" alt="logo" style="max-width: 50px; height: auto;">
+                <h4 class="mr-3">AU Vaccine</h4>
+            </div>
+            <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+                <i class="fa-solid fa-user-large fa-5x my-3"></i>
+                <h6 class="text-center" id="displayname"></h6>
+                <a href="/myprofile" class="px-3">My Profile</a>
+            </div>
+            <hr />
+            <!--Side Bar List-->
+            <ul class="list-unstyled components">
+                <li class="nav-link">
+                    <a href="/home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/booking"><i class="fa-regular fa-calendar-check"></i><span>Booking Vaccine</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/myapp"><i class="fa-regular fa-calendar-days"></i></i><span>My Appointment</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/history"><i class="fa-solid fa-syringe"></i><span>Vaccine History</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/selfreport"><i class="fa-solid fa-virus-covid"></i><span>Self-Report</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/login"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+                </li>
+            </ul>
+            <hr />
+        </nav>
+        <!--Page Content-->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+                <!--Sidebar Toggle-->
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa-solid fa-bars"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <div id="noti"></div>
+                </div>
+            </nav>
+            <div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+                <h1>My Profile</h1>
+            </div>
+            <div class="container-fluid d-flex align-content-center justify-content-center">
+                <span style=color:azure;><i class="fa-solid fa-user-large fa-10x my-3 fa-border" id="avatar"></i></span>
+            </div>
+            <p class="lead text-center">In case of you need to change your AU ID, Citizen ID/Passport, Gender, and Type. Please contact system admin through AU student affair</p>
+            <!-- User Information-->
+            <div class="container-fluid">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold m-0">ID:</p>
+                            <p class="displayID"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Password:</p>
+                            <p>********</p>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <a href="#change_pwd" class="btn btn-primary" data-toggle="modal">Change Password</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Name:</p>
+                            <p class="displayName"></p>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <a href="#change_name" class="btn btn-primary" data-toggle="modal">Change Name</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Surname:</p>
+                            <p class="displaySurname"></p>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <a href="#change_surname" class="btn btn-primary" data-toggle="modal">Change Surname</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Email:</p>
+                            <p class="displayEmail"></p>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <a href="#change_email" class="btn btn-primary" data-toggle="modal">Change Email</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Phone Number:</p>
+                            <p class="displayPhone"></p>
+                        </div>
+                        <div class="col d-flex align-items-center">
+                            <a href="#change_phone" class="btn btn-primary" data-toggle="modal">Change Phone Number</a>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Citizen ID/Passport ID:</p>
+                            <p class="displayCid"></p>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">Gender:</p>
+                            <p class="displayGender"></p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col border-bottom">
+                            <p class="font-weight-bold">You are:</p>
+                            <p class="displayType"></p>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Password Modal-->
+            <div class="modal fade" id="change_pwd">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Please fill new password</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="old_pwd">Old Password:</label>
+                            <input type="password" placeholder="Enter old password" id="old_pwd" name="old_pwd"><br>
+                            <label for="new_pwd">New Password:</label>
+                            <input type="password" placeholder="Enter new password" id="new_pwd" name="new_pwd"><br>
+                            <label for="cnew_pwd">Confirm New Password:</label>
+                            <input type="password" placeholder="Enter new password" id="cnew_pwd" name="cnew_pwd">
+                            <p id="message"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnPwd">Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Name Modal-->
+            <div class="modal fade" id="change_name">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Please fill new name</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="new_name">New Name:</label>
+                            <input type="text" placeholder="Enter new name" id="new_name" name="new_name">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnName">Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Surname Modal-->
+            <div class="modal fade" id="change_surname">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Please fill new surname</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="new_surname">New surname:</label>
+                            <input type="text" placeholder="Enter new surname" id="new_surname" name="new_surname">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnSurname">Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Email Modal-->
+            <div class="modal fade" id="change_email">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Please fill new email</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="new_email">New Email:</label>
+                            <input type="email" placeholder="Enter new email" id="new_email" name="new_email">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnEmail">Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Phone Number Modal-->
+            <div class="modal fade" id="change_phone">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Please fill new password</h5>
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <label for="new_name">New Phone Number:</label>
+                            <input type="text" placeholder="Enter new phone number" id="new_phone" name="new_phone">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnPhone">Confirm</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        console.log('READY')
+        //notificaiotn
+        const noti = document.getElementById('noti')
+        axios.get('user/noti').then((response) => {
+            console.log(response.data)
+            noti.innerHTML = response.data
+        });
+        //Display user profile
+        const id = document.querySelector('.displayID')
+        const name = document.querySelector('.displayName')
+        const surname = document.querySelector('.displaySurname')
+        const email = document.querySelector('.displayEmail')
+        const phone = document.querySelector('.displayPhone')
+        const gender = document.querySelector('.displayGender')
+        const type = document.querySelector('.displayType')
+        const cid = document.querySelector('.displayCid')
+        axios.get('/user/profile').then((response) => {
+            let profile = response.data;
+            let list = profile.split(' ');
+            id.innerText = list[0];
+            name.innerText = list[1];
+            surname.innerText = list[2];
+            email.innerText = list[3];
+            phone.innerText = list[4];
+            gender.innerText = list[5];
+            type.innerText = list[6];
+            cid.innerText = list[7];
+        })
+        //Change user info
+        const cpwd = document.getElementById("new_pwd");
+        const cemail = document.getElementById("new_email");
+        const cname = document.getElementById("new_name");
+        const csurname = document.getElementById("new_surname");
+        const cphone = document.getElementById("new_phone");
+        const btnPwd = document.getElementById("btnPwd");
+        const btnEmail = document.getElementById("btnEmail");
+        const btnName = document.getElementById("btnName");
+        const btnSurname = document.getElementById("btnSurname");
+        const btnPhone = document.getElementById("btnPhone");
+
+        btnPwd.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const pwd = cpwd.value;
+            let response = await axios.post("/user/cpwd", {
+                user_pwd: pwd,
+            });
+        });
+        btnName.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const name = cname.value;
+            let response = await axios.post("/user/cname", {
+                user_name: name,
+            });
+            window.location.reload();
+        });
+        btnSurname.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const surname = csurname.value;
+            let response = await axios.post("/user/csurname", {
+                user_surname: surname,
+            });
+            window.location.reload();
+        });
+        btnEmail.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const email = cemail.value;
+            let response = await axios.post("/user/cemail", {
+                user_email: email,
+            });
+            window.location.reload();
+        });
+        btnPhone.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const phone = cphone.value;
+            let response = await axios.post("/user/cphone", {
+                user_phone: phone,
+            });
+            window.location.reload();
+        });
+        //Match Password
+        $('#new_pwd, #cnew_pwd').on('input', function () {
+            if ($('#new_pwd').val() == $('#cnew_pwd').val()) {
+                $('#message').html('Your password is matched').css('color', 'green');
+            }
+            else $('#message').html('Your password is not matched').css('color', 'red');
+        });
+    });
+</script>

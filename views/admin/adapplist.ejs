@@ -1,0 +1,119 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Appointment List</h1>
+</div>
+<div class="container-fluid">
+    <!--APP TABLE -->
+    <table id="app_table" class="table table-light table-bordered table-hover ">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Time</th>
+                <th scope="col">Location</th>
+                <th scope="col">Hospital</th>
+                <th scope="col">Vaccine Name</th>
+                <th scope="col">Remaining Vaccine</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <!-- Delete and modify appointment-->
+    <p class="lead mt-5">Please input appointment id that you want to modify time and location</p>
+    <p class="lead">In case of modify date, hospital, vaccine brand and vaccine amount please delete
+        appointment and create a new one</p>
+    <div class="form-group">
+        <label for="searchID">Appointment ID:</label>
+        <input type="text" class="form-control" placeholder="Enter Appointment ID" id="searchID" name="searchID">
+        <button type="button" class="btn btn-primary mt-2" id="searchApp">Submit</button>
+    </div>
+    <p class="lead mt-2">After submit appoinment id, the modify data will appear below</p>
+    <div id="displayModify">
+    </div>
+</div>
+<!--DataTable-->
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
+
+<script>
+    $(document).ready(function () {
+        //display app list table
+        var data;
+        $('#app_table').DataTable({
+            "scrollX": true,
+            "sScrollXInner": "100%",
+            "ajax": {
+                "url": "http://localhost:3000/appointment/apptable",
+                "type": "GET",
+            },
+            columns: [
+                { data: 'app_id' },
+                { data: 'app_date' },
+                { data: 'app_time' },
+                { data: 'app_location' },
+                { data: 'vacc_hospital' },
+                { data: 'vacc_name' },
+                { data: 'vacc_amount' },
+            ],
+        });
+        //Display and modify appointment detail
+        const inputId = document.getElementById('searchID');
+        const id = document.querySelector('.displayAppId');
+        const time = document.querySelector('.displayAppTime');
+        const location = document.querySelector('.displayAppLo');
+        const sbtn = document.getElementById('searchApp');
+        sbtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const searchId = inputId.value;
+            axios.post("/appointment/appdisplay", {
+                app_id: searchId,
+            })
+                .then((response) => {
+                    displayModify.innerHTML = response.data;
+                    const btnDelete = document.getElementById('btnDelete');
+                    btnDelete.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        const searchId = inputId.value;
+                        console.log(searchId);
+                        axios.post("/appointment/appdelete", {
+                            app_id: searchId,
+                        })
+                            .then(() => {
+                                window.location.reload();
+                            });
+                    });
+                    //change appointment time
+                    const btnTime = document.getElementById('btnTime');
+                    const inputTime = document.getElementById('app_time');
+                    btnTime.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        const searchId = inputId.value;
+                        const ctime = inputTime.value;
+                        axios.post("/appointment/apptime", {
+                            app_id: searchId,
+                            app_time: ctime,
+                        })
+                            .then(() => {
+                                window.location.reload();
+                            });
+                    });
+                    //change appointment location
+                    const btnLo = document.getElementById('btnLo');
+                    const inputLo = document.getElementById('app_location');
+                    btnLo.addEventListener("click", async (e) => {
+                        e.preventDefault();
+                        const searchId = inputId.value;
+                        const clo = inputLo.value;
+                        axios.post("/appointment/applocation", {
+                            app_id: searchId,
+                            app_location: clo,
+                        })
+                            .then(() => {
+                                window.location.reload();
+                            });
+                    });
+                });
+        });
+    });
+</script>

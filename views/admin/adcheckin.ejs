@@ -1,0 +1,49 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Check In</h1>
+</div>
+<div class="container-fluid">
+    <p class="lead">Please Enter user ID to begin check in process</p>
+    <!--Search by user id-->
+    <div class="form-group">
+        <label for="user_id">User ID:</label>
+        <input type="text" class="form-control" placeholder="Enter user id to search" id="user_id" name="user_id">
+        <button type="button" class="btn btn-primary mt-2" id="searchId">Search</button>
+    </div>
+    <!--Display result-->
+    <div id="result">
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        //search user id for check in
+        const userId = document.getElementById('user_id')
+        const btnSearch = document.getElementById('searchId')
+        const result = document.getElementById('result')
+
+        btnSearch.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const user_id = userId.value;
+            axios.post("/appointment/appcheckin", {
+                user_id: user_id,
+            }).then((response) => {
+                result.innerHTML = response.data;
+                const btndose = document.getElementById('doseId')
+                const dose = document.getElementById('dose_id')
+                btndose.addEventListener("click", async (e) => {
+                    e.preventDefault();
+                    const user_id = userId.value;
+                    const user_dose = dose.value
+                    axios.post("/appointment/appdose", {
+                        user_id: user_id,
+                        vacc_dose: user_dose
+                    }).then((response) => {
+                        alert(response.data);
+                        window.location.reload();
+                    });
+                });
+            });
+        });
+    });
+</script>

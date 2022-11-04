@@ -1,0 +1,28 @@
+<% renderData.forEach((data) => { %>
+    <div class="card">
+        <div class="card-header font-weight-bolder h5 bg-primary text-white"><%= data.app_date.substring(0, 10) %></div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Time: </b><%= data.app_time %></li>
+                <li class="list-group-item"><b>Location: </b><%= data.app_location %></li>
+                <li class="list-group-item"><b>Vaccine: </b><%= data.vacc_name %></li>
+            </ul>
+        <div class="card-footer"><a href="#<%= data.vacc_name + data.app_id %>" class="btn btn-danger" data-toggle="modal">CANCEL</a></div>
+    </div>
+    <div class="modal fade" id = "<%= data.vacc_name + data.app_id %>" >
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Please confirm your appointment cancel</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <h5>You are certainly and intent to cancel appointment on <%= data.app_date.substring(0, 10) %> ?</h5>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="cancelapp('<%=data.app_id%>')" id="<%= `${data.app_id}:${data.vacc_name}` %>">Yes</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">NO</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<% }) %>

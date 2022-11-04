@@ -1,0 +1,352 @@
+<style>
+    html {
+        height: 100%;
+    }
+
+    body {
+        min-height: 100%;
+        background-image: url("img/bg.png");
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    #bg-red {
+        background-color: #ab1e2e;
+    }
+
+    #bgform {
+        background-color: #ffffff;
+    }
+
+    .nav-pills>li>a.active {
+        background-color: #ab1e2e !important;
+        color: #ffffff !important;
+    }
+
+    .nav-pills>li>a:hover {
+        background-color: #de5061;
+        color: #ffffff !important;
+    }
+
+    .nav-link-color {
+        color: #ab1e2e;
+    }
+
+    .btn {
+        background-color: #ab1e2e !important;
+        color: #ffffff !important;
+    }
+</style>
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3" id="bg-red">
+    <img src="img/logo.png" class="img-fluid" alt="logo" style="max-width: 200px; height: auto;">
+    <h1>Assumption University Vaccine Booking System</h1>
+</div>
+
+<!--Form-->
+<div class="container col-md-8 py-5 my-5" id="bgform">
+
+    <!-- Pills navs -->
+    <ul class="nav nav-pills nav-justified" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active nav-link-color" data-toggle="pill" href="#login">LOGIN</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link nav-link-color" data-toggle="pill" href="#register">REGISTER</a>
+        </li>
+    </ul>
+
+    <!-- Pills content -->
+    <div class="tab-content">
+        <!--Login Form-->
+        <div id="login" class="container tab-pane active"><br>
+            <form class="needs-validation" novalidate>
+                <!--ID-->
+                <div class="form-group">
+                    <label for="id">AU ID:</label>
+                    <input type="text" class="form-control" placeholder="Enter AU ID" id="id" name="id" required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!--Password-->
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" placeholder="Enter Password" id="pwd" name="pwd"
+                        required>
+                    <div class="valid-feedback">Valid.</div>
+                    <div class="invalid-feedback">Please fill out this field.</div>
+                </div>
+
+                <!--Remember Me-->
+                <!--
+                    <div class="form-group form-check">
+                        <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" name="remember"> Remember me
+                        </label>
+                    </div>
+                    -->
+                <!--Login Button-->
+                <!--<a href="home.html">-->
+                <button class="btn btn-primary" id="login-btn">Login</button>
+                <!--</a>-->
+                <!--<input type="submit" value="login">-->
+            </form>
+        </div>
+
+        <!--Register Form-->
+        <div id="register" class="container tab-pane fade"><br>
+            <form class="was-validated" novalidate action="/register" method="POST">
+                <!--ID and Email-->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="id">AU ID:</label>
+                        <input type="text" class="form-control" placeholder="Enter AU ID" id="user_id" name="user_id"
+                            required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="col">
+                        <label for="email">Email:</label>
+                        <input type="email" class="form-control" placeholder="Enter Email" id="user_email"
+                            name="user_email" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                </div>
+                <!--Password-->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" placeholder="Enter Password" id="user_pwd"
+                            name="user_pwd" required minlength="8" maxlength="20">
+                        <span id="message"></span>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Password must be more than 8 character.</div>
+
+                    </div>
+                    <div class="col">
+                        <label for="cpwd">Confirm Password:</label>
+                        <input type="password" class="form-control" placeholder="Enter Password" id="cpwd" name="cpwd"
+                            required minlength="8" maxlength="20">
+                        <span id="message"></span>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Password must be more than 8 character.</div>
+                    </div>
+                </div>
+                <!--Name and Surname-->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="name">Name:</label>
+                        <input type="text" class="form-control" placeholder="Enter Name" id="user_name" name="user_name"
+                            required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="col">
+                        <label for="sname">Surname:</label>
+                        <input type="text" class="form-control" placeholder="Enter Surname" id="user_surname"
+                            name="user_surname" required>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                </div>
+                <!--Sex and Type-->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="gender">Gender:</label>
+                        <select class="form-control" id="user_gender" name="user_gender">
+                            <option>Male</option>
+                            <option>Female</option>
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label for="type">You are:</label>
+                        <select class="form-control" id="user_type" name="user_type">
+                            <option>Student</option>
+                            <option>Personnel</option>
+                        </select>
+                    </div>
+                </div>
+                <!--Phone and Citizen ID-->
+                <div class="form-row">
+                    <div class="col">
+                        <label for="phone">Phone number:</label>
+                        <input type="tel" class="form-control" placeholder="Enter Phone number" id="user_phone"
+                            name="user_phone" required minlength="10" maxlength="10">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                    <div class="col">
+                        <label for="cid">Thai citizen ID or Passport number:</label>
+                        <input type="text" class="form-control" placeholder="Enter Thai citizen ID or Passport number"
+                            id="user_citizen_id" name="user_citizen_id" required minlength="8" maxlength="13">
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                    </div>
+                </div>
+                <!--PDPA-->
+                <div class="form-group form-check">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" name="pdpa" required> I accept and agree on
+                        <a href="#pdpamodal" data-toggle="modal" class="text-primary">PDPA compliance</a>
+                        <!-- PDPA Modal -->
+                        <div class="modal fade" id="pdpamodal">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">PDPA Privacy Policy of AU Vaccine Booking System
+                                            website</h5>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Assumption University operates the AU Vaccine Booking System website, which
+                                        provides the SERVICE.<br>
+                                        This page is used to inform website visitors regarding our policies with the
+                                        collection, use, and disclosure of Personal Information if anyone decided to
+                                        use our Service, the AU Vaccine Booking System website.<br>
+                                        If you choose to use our Service, then you agree to the collection and use
+                                        of information in relation with this policy. The Personal Information that
+                                        we collect are used for providing and improving the Service. We will not use
+                                        or share your information with anyone.<br><br>
+
+                                        <b>Information Collection and Use</b><br>
+                                        For a better experience while using our Service, we require you to provide
+                                        us with certain personally identifiable information, including but not
+                                        limited to your name, and phone number. The information that we collect will
+                                        be used to contact or identify you.<br>
+
+                                        <b>Log Data</b><br>
+                                        We want to inform you that whenever you visit our Service, we collect
+                                        information that your browser sends to us that is called Log Data. This Log
+                                        Data may include information such as your computer's Internet Protocol
+                                        (“IP”) address, browser version, pages of our Service that you visit, the
+                                        time and date of your visit, the time spent on those pages, and other
+                                        statistics.<br>
+
+                                        <b>Cookies</b><br>
+                                        Cookies are files with small amount of data that is commonly used an
+                                        anonymous unique identifier. These are sent to your browser from the website
+                                        that you visit and are stored on your computer's hard drive.
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary"
+                                            data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="valid-feedback">Valid.</div>
+                        <div class="invalid-feedback">Please check this checkbox to continue.</div>
+                    </label>
+                </div>
+                <!--Register Button-->
+                <button type="submit" class="btn btn-primary" id="regist-btn">Register</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!--Form-->
+<!--Footer-->
+<div class="container-fluid text-white mt-5" id="bg-red">
+    <h3 class="text-center font-weight-bold py-3">Contact Us</h3>
+    <div class="row">
+        <div class="col">
+            <h4>Hua Mak Campus</h4>
+            <p>
+                592/3 Soi Ramkhamhaeng 24,<br>
+                Ramkhamhaeng Rd., Hua Mak,Bang Kapi, Bangkok 10240,<br>
+                Thailand<br>
+                Tel. +66-2-3004543-62 Fax. +66-2-3004563<br>
+                E-mail: abac@au.edu<br>
+                Bus Line: No.22, 40, 58, 60, 71, 92, 93, 99, 109, 113, 115, 126, 137, 168, 207
+            </p>
+        </div>
+        <div class="col">
+            <h4>Suvarnabhumi Campus</h4>
+            <p>
+                88 Moo 8 Bang Na-Trad Km. 26<br>
+                Bang Sao Thong, Samut Prakan 10570,<br>
+                Thailand<br>
+                Tel. +66-2-7232222 Fax. +66-2-7070395<br>
+                E-mail: abac@au.edu<br>
+                Bus Line: No.46, 132, 133, 533, 552, 537.
+            </p>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        console.log('READY');
+        //LOGIN
+        const idInput = document.getElementById("id");
+        const passwordInput = document.getElementById("pwd");
+        const btn = document.getElementById("login-btn");
+
+        btn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const id = idInput.value;
+            const pwd = passwordInput.value;
+            let response = await axios.post("/user/auth", {
+                id: id,
+                pwd: pwd
+            });
+            console.log(response);
+            console.log(response.data);
+            if (response.data == 'user') {
+                window.location.href = "/home";
+            } else if (response.data == 'admin') {
+                window.location.href = "/admin/adcrapp";
+            }
+            //return false;
+        });
+        //REGISTER
+        const rid = document.getElementById("user_id");
+        const rpwd = document.getElementById("user_pwd");
+        const remail = document.getElementById("user_email");
+        const rname = document.getElementById("user_name");
+        const rsurname = document.getElementById("user_surname");
+        const rgender = document.getElementById("user_gender");
+        const rtype = document.getElementById("user_type");
+        const rphone = document.getElementById("user_phone");
+        const rcid = document.getElementById("user_citizen_id");
+        const rbtn = document.getElementById("regist-btn");
+
+        rbtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const id = rid.value;
+            const pwd = rpwd.value;
+            const email = remail.value;
+            const name = rname.value;
+            const surname = rsurname.value;
+            const gender = rgender.value;
+            const type = rtype.value;
+            const phone = rphone.value;
+            const cid = rcid.value;
+            let response = await axios.post("/user/register", {
+                user_id: id,
+                user_pwd: pwd,
+                user_email: email,
+                user_name: name,
+                user_surname: surname,
+                user_gender: gender,
+                user_type: type,
+                user_phone: phone,
+                user_citizen_id: cid
+            });
+            console.log(response);
+            if (response.data.status == 'SUCCESS') {
+                alert('register successful');
+                window.location.href = "/login";
+            }
+            return false;
+        });
+        $('#user_pwd, #cpwd').on('input', function () {
+            if ($('#user_pwd').val() == $('#cpwd').val()) {
+                $('#message').html('Your password is matched').css('color', 'green');
+            }
+            else $('#message').html('Your password is not matched').css('color', 'red');
+        });
+    });
+</script>

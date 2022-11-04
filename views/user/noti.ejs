@@ -1,0 +1,39 @@
+
+<% if(renderData == 0) { %> 
+    <li class="nav-item dropdown list-unstyled mx-1">
+        <a class="nav-link icon-button" href="#" id="alertsDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell fa-xl ml-2"></i>
+        </a>
+    </li> 
+<% } else { %> 
+    <!--Notification-->
+    <li class="nav-item dropdown list-unstyled mx-1">
+        <a class="nav-link icon-button" href="#" id="alertsDropdown" role="button"
+            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa-solid fa-bell fa-xl ml-2"></i>
+            <!-- Counter - Alerts -->
+            <span class="icon-button__badge" id="counter_alert"><%= renderData.length %></span>
+        </a>
+        <!-- Dropdown - Alerts -->
+        <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in"
+            aria-labelledby="alertsDropdown">
+            <h6 class="dropdown-header">Notification</h6>
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div>
+                    <div class="font-weight-bold">Reminder</div>
+                    <p>You have appointment on <%= renderData[0].app_date %></p>
+                </div>
+            </a>
+            <% for(var i = 1, n = renderData.length; i < n; i++) { %> 
+            <a class="dropdown-item d-flex align-items-center" href="#">
+                <div>
+                    <div class="font-weight-bold"><%= renderData[i].art_title %></div>
+                    <p><%= renderData[i].art_body.substring(0,20) %></p>
+                </div>
+            </a>
+            <% } %> 
+        </div>
+    </li> 
+<% } %> 
+

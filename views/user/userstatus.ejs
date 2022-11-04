@@ -1,0 +1,45 @@
+<% if(renderData == 1) { %>
+    <!--Show recovery page-->
+    <div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+        <h1>Self-Report on COVID-19 Recovery</h1>
+    </div>
+    <div class="container-fluid">
+        <p class="lead">This is self-report that will keep track of covid-19 situation inside university campus.
+            When you submit the report, it will be recorded the number of cured people and displayed on the
+            home page.</p><br>
+        <p class="lead">ATK Evidence for cured(only 1 line at C label)</p>
+        <p class="lead">***Please Write down your ID and test date in the ATK picture before upload</p>
+        <!--Upload-->
+        <form>
+            <div class="form-group">
+                <label for="atkrecover">File number limit: 1 Single file/ size limit: 5MB /Allowed file types:
+                    Image.jpg</label>
+                <input type="file" class="form-control-file" id="atkrecover" enctype="multipart/form-data"
+                    name="rec" accept="image/png, image/jpg, image/jpeg" />
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnInf">Submit</button>
+        </form>
+    </div>
+<% } else { %>
+    <!--Show infect page-->
+    <div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+        <h1>Self-Report on COVID-19 Infection</h1>
+    </div>
+    <div class="container-fluid">
+        <p class="lead">This is self-report that will keep track of covid-19 situation inside university campus.
+            When you submit the report, it will be recorded the number of infected people and displayed on the
+            home page.</p><br>
+        <p class="lead">ATK Evidence for infected (1 line at C label and 1 line T label)</p>
+        <p class="lead">***Please Write down your ID and test date in the ATK picture before upload</p>
+        <!--Upload-->
+        <form>
+            <div class="form-group">
+                <label for="atkinfected">File number limit: 1 Single file/ size limit: 5MB /Allowed file types:
+                    Image.jpg</label>
+                <input type="file" class="form-control-file" id="atkinfected" enctype="multipart/form-data"
+                    name="inf" accept="image/png, image/jpg, image/jpeg" />
+            </div>
+            <button type="submit" class="btn btn-primary" id="btnInf">Submit</button>
+        </form>
+    </div>
+<% } %>

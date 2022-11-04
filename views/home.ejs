@@ -1,0 +1,161 @@
+<style>
+    table.table-bordered {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table.table-bordered>thead>tr>th {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+
+    table.table-bordered>tbody>tr>td {
+        border: 1px solid black;
+        border-collapse: collapse;
+    }
+</style>
+<title>Assumption University Vaccine Booking System</title>
+
+
+<body>
+    <div id="fb-root"></div>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v14.0"
+        nonce="vUkhmMql"></script>
+    <div class="wrapper">
+        <!--Side Bar-->
+        <nav id="sidebar">
+            <!--Side Bar Header-->
+            <div class="sidebar-header d-flex align-items-center justify-content-center">
+                <img src="img/logo.png" class="img-fluid mr-3" alt="logo" style="max-width: 50px; height: auto;">
+                <h4 class="mr-3">AU Vaccine</h4>
+            </div>
+            <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+                <i class="fa-solid fa-user-large fa-5x my-3"></i>
+                <h6 class="text-center" name="name" id="displayname"></h6>
+                <a href=" /myprofile" class="px-3">My Profile</a>
+            </div>
+            <hr />
+            <!--Side Bar List-->
+            <ul class="list-unstyled components">
+                <li class="active nav-link">
+                    <a href="/home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/booking"><i class="fa-regular fa-calendar-check"></i><span>Booking Vaccine</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/myapp"><i class="fa-regular fa-calendar-days"></i></i><span>My Appointment</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/history"><i class="fa-solid fa-syringe"></i><span>Vaccine History</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/selfreport"><i class="fa-solid fa-virus-covid"></i><span>Self-Report</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/login"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+                </li>
+            </ul>
+            <hr />
+        </nav>
+        <!--Page Content-->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+                <!--Sidebar Toggle-->
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa-solid fa-bars"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <div id="noti"></div>
+                </div>
+            </nav>
+            <div class="container">
+                <div class="row">
+                    <!--Article Card-->
+                    <div class="col col-12 col-sm-6">
+                        <h3 class="text-center">AU Announcements</h3>
+                        <div id="displayart"></div>
+                        <div class="line"></div>
+                    </div>
+                    <div class="col">
+                        <!--Infected Number-->
+                        <div class="row">
+                            <h3 class="text-center">Covid-19 Situation inside AU</h3>
+                            <p >if you are infected with covid, please report your infected at report menu on your left side. 
+                                In case of emergency please contact 02-708-7501, Ruamchai Pracharug Hospital</p>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th class="text-center bg-danger text-light">Infected Today</th>
+                                        <th class="text-center bg-warning text-light">Total Infected</th>
+                                        <th class="text-center bg-success text-light">Total Cured</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class='text-center font-weight-bold' id="today"></td>
+                                        <td class='text-center font-weight-bold' id="totalinf"></td>
+                                        <td class='text-center font-weight-bold' id="totalrec"></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <!--Covid19-Guideline-->
+                            <img class="img-fluid" src="img/cov19_guideline.png">
+                            <div class="line"></div>
+                        </div>
+                        <!--Facbook Page-->
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col">
+                                    <div class="fb-page" data-href="https://www.facebook.com/ddcmophthailand"
+                                        data-tabs="timeline" data-width="400" data-height="700" data-small-header="false"
+                                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                        <blockquote cite="https://www.facebook.com/ddcmophthailand"
+                                            class="fb-xfbml-parse-ignore"><a
+                                                href="https://www.facebook.com/ddcmophthailand">Thailand DDC - English</a>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="fb-page" data-href="https://www.facebook.com/WHO/" data-tabs="timeline"
+                                        data-width="400" data-height="700" data-small-header="false"
+                                        data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true">
+                                        <blockquote cite="https://www.facebook.com/WHO/" class="fb-xfbml-parse-ignore"><a
+                                                href="https://www.facebook.com/WHO/">World Health Organization (WHO)</a>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        console.log('READY')
+        //notification
+        const noti = document.getElementById('noti')
+        axios.get('user/noti').then((response) => {
+            console.log(response.data)
+            noti.innerHTML = response.data
+        });
+        //display infect number
+        const today = document.getElementById('today')
+        const totalinf = document.getElementById('totalinf')
+        const totalrec = document.getElementById('totalrec')
+        axios.get('/user/infnumber').then((response) => {
+            today.innerText = response.data.today;
+            totalinf.innerText = response.data.totalinf;
+            totalrec.innerText = response.data.totalrec;
+        });
+        //display article
+        const art = document.getElementById('displayart')
+        axios.get('article/displayart').then((response) => {
+            art.innerHTML = response.data
+        });
+    });
+</script>

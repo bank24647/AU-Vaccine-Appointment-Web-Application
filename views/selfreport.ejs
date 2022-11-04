@@ -1,0 +1,97 @@
+<title>Assumption University Vaccine Booking System</title>
+
+<body>
+    <div class="wrapper">
+        <!--Side Bar-->
+        <nav id="sidebar">
+            <!--Side Bar Header-->
+            <div class="sidebar-header d-flex align-items-center justify-content-center">
+                <img src="img/logo.png" class="img-fluid mr-3" alt="logo" style="max-width: 50px; height: auto;">
+                <h4 class="mr-3">AU Vaccine</h4>
+            </div>
+            <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+                <i class="fa-solid fa-user-large fa-5x my-3"></i>
+                <h6 class="text-center" name="name" id="displayname"></h6>
+                <a href="/myprofile" class="px-3">My Profile</a>
+            </div>
+            <hr />
+            <!--Side Bar List-->
+            <ul class="list-unstyled components">
+                <li class="nav-link">
+                    <a href="/home"><i class="fa-solid fa-house"></i><span>Home</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/booking"><i class="fa-regular fa-calendar-check"></i><span>Booking Vaccine</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/myapp"><i class="fa-regular fa-calendar-days"></i></i><span>My Appointment</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/history"><i class="fa-solid fa-syringe"></i><span>Vaccine History</span></a>
+                </li>
+                <li class="active nav-link">
+                    <a href="/selfreport"><i class="fa-solid fa-virus-covid"></i><span>Self-Report</span></a>
+                </li>
+                <li class="nav-link">
+                    <a href="/login"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+                </li>
+            </ul>
+            <hr />
+        </nav>
+        <!--Page Content-->
+        <div id="content">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+                <!--Sidebar Toggle-->
+                <div class="container-fluid">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info">
+                        <i class="fa-solid fa-bars"></i>
+                        <span>Toggle Sidebar</span>
+                    </button>
+                    <div id="noti"></div>
+                </div>
+            </nav>
+            <div id='displaystatus'></div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function () {
+        //notificaiotn
+        const noti = document.getElementById('noti')
+        axios.get('user/noti').then((response) => {
+            console.log(response.data)
+            noti.innerHTML = response.data
+        });
+        const status = document.querySelector('#displaystatus')
+        axios.get('/user/userstatus').then((response) => {
+            console.log(content);
+            content = response.data
+            status.innerHTML = content
+            //Get infected Img
+            const btnInf = document.getElementById('btnInf')
+            btnInf.addEventListener("click", async (e) => {
+                e.preventDefault();
+                var formData = new FormData();
+                var imagefile = document.querySelector('#atkinfected');
+                formData.append('inf', imagefile.files[0]);
+                axios.post('/user/inf', formData).then((response) => {
+                    console.log(response.data)
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+            //Get Recover Img
+            btnInf.addEventListener("click", async (e) => {
+                e.preventDefault();
+                var formData = new FormData();
+                var imagefile = document.querySelector('#atkrecover');
+                formData.append('rec', imagefile.files[0]);
+                axios.post('/user/rec', formData).then((response) => {
+                    console.log(response.data)
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+        });
+    });
+</script>

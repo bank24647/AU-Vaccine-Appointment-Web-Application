@@ -1,0 +1,36 @@
+<!--Side Bar-->
+<nav id="sidebar">
+    <!--Side Bar Header-->
+    <div class="sidebar-header d-flex align-items-center justify-content-center">
+        <img src="/img/logo.png" class="img-fluid mr-3" alt="logo" style="max-width: 50px; height: auto;">
+        <h4 class="mr-3">AU Vaccine</h4>
+    </div>
+    <div class="container-fluid d-flex flex-column align-items-center justify-content-center">
+        <i class="fa-solid fa-user-large fa-5x my-3"></i>
+        <h6 class="text-center" name="name" id="displayname"></h6>
+        <a href="/admin/myprofile" class="px-3">My Profile</a>
+    </div>
+    <hr />
+    <!--Side Bar List-->
+    <ul class="list-unstyled components">
+
+        <% [
+        { page: 'adcrapp', iconClass: 'fa-regular fa-calendar-plus', label: 'Create Appointment'},
+        { page: 'adapplist', iconClass: 'fa-regular fa-calendar-days', label: 'Appointment List'},
+        { page: 'adcheckin', iconClass: 'fa-regular fa-square-caret-right', label: 'Check-In'},
+        { page: 'adcheckout', iconClass: 'fa-regular fa-square-caret-left', label: 'Check-Out'},
+        { page: 'adcrart', iconClass: 'fa-solid fa-file-pen', label: 'Create Article'},
+        { page: 'adartlist', iconClass: 'fa-solid fa-file-lines', label: 'Article List'},
+        { page: 'adprofile', iconClass: 'fa-solid fa-user-pen', label: 'Edit User Profile'},
+        { page: 'adreport', iconClass: 'fa-solid fa-table-list', label: 'Report'},
+        ].forEach((navLink) => { %>
+        <li class="<%= page.slice('/')[1] === navLink.page ? 'active ' : ''%>nav-link">
+            <a href="/admin/<%= navLink.page %>"><i class="<%= navLink.iconClass %>"></i><span><%= navLink.label %></span></a>
+        </li>
+        <% }) %>
+        <li class="nav-link">
+            <a href="../login"><i class="fa-solid fa-right-from-bracket"></i><span>Logout</span></a>
+        </li>
+    </ul>
+    <hr />
+</nav>

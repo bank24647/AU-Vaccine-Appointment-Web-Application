@@ -1,0 +1,153 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Edit User Profile</h1>
+</div>
+<!--Search user id-->
+<div class="container-fluid">
+    <p class="lead">Please Enter user ID to search or delete</p>
+    <!--Search by user id-->
+    <div class="form-group">
+        <label for="user_id">User ID:</label>
+        <input type="text" class="form-control" placeholder="Enter user id to search" id="user_id" name="user_id">
+        <button type="button" class="btn btn-primary mt-2" id="searchId">Search</button>
+        <a href="#delete" class="btn btn-danger mt-2" data-toggle="modal">DELETE</a>
+
+    </div>
+    <!-- Delete Modal-->
+    <div class="modal fade" id="delete">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">DELETE USER ACCOUNT</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <from>
+                        <h3>Whoa, There!</h3>
+                        <p>Once you delete this user account, there's no getting back.<br>
+                            Please make sure that you want to do this.<br>
+                            If you are certain, please type user ID again for confirmation</p>
+                        <label for="del_id">User ID:</label>
+                        <input type="text" placeholder="Enter user id" id="del_id" name="del_id" class="form-control">
+                    </from>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" id="btndelete">Confirm</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Display result-->
+    <div id="result">
+
+    </div>
+</div>
+
+</body>
+<script>
+    $(document).ready(function () {
+
+        //search user id for edit
+        const userId = document.getElementById('user_id')
+        const btnSearch = document.getElementById('searchId')
+        const result = document.getElementById('result')
+        const delId = document.getElementById('del_id')
+        const btndel = document.getElementById('btndelete')
+        btndel.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const user_id = delId.value;
+            axios.post("/user/delid", {
+                user_id: user_id,
+            }).then((response) => {
+                alert(response.data);
+            });
+        });
+        btnSearch.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const user_id = userId.value;
+            await axios.post("/user/editprofile", {
+                user_id: user_id,
+            }).then((response) => {
+                result.innerHTML = response.data;
+            });
+            const id = document.getElementById("new_id");
+            const ccid = document.getElementById("cur_cid");
+            const btnid = document.getElementById("btnId");
+            const cid = document.getElementById("new_cid");
+            const btncid = document.getElementById("btnCid");
+            const gender = document.getElementById("new_gender");
+            const btngender = document.getElementById("btnGender");
+            const type = document.getElementById("new_type");
+            const btntype = document.getElementById("btnType");
+            const role = document.getElementById("new_role");
+            const btnrole = document.getElementById("btnRole");
+            const cid2 = document.getElementById("cur_id2");
+            const cid3 = document.getElementById("cur_id3");
+            const cid4 = document.getElementById("cur_id4");
+            const cid5 = document.getElementById("cur_id5");
+
+            btnid.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const user_id = id.value;
+                const user_cid = ccid.value;
+                let response = await axios.post("/user/chid", {
+                    user_id: user_id,
+                    user_cid: user_cid
+                }).then((response) => {
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+            btncid.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const user_cid = cid.value;
+                const user_id = cid2.value;
+                let response = await axios.post("/user/chcid", {
+                    user_cid: user_cid,
+                    user_id: user_id
+                }).then((response) => {
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+            btngender.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const user_gender = gender.value;
+                const user_id = cid3.value;
+                let response = await axios.post("/user/chgender", {
+                    user_gender: user_gender,
+                    user_id: user_id
+                }).then((response) => {
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+            btntype.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const user_type = type.value;
+                const user_id = cid4.value;
+                let response = await axios.post("/user/chtype", {
+                    user_type: user_type,
+                    user_id: user_id
+                }).then((response) => {
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+            btnrole.addEventListener("click", async (e) => {
+                e.preventDefault();
+                const user_role = role.value;
+                const user_id = cid5.value;
+                let response = await axios.post("/user/chrole", {
+                    user_role: user_role,
+                    user_id: user_id
+                }).then((response) => {
+                    alert(response.data);
+                    window.location.reload();
+                });
+            });
+        });
+
+    });
+</script>

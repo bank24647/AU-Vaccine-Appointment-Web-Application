@@ -1,0 +1,204 @@
+<div class="container-fluid">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col border-bottom">
+                <p class="font-weight-bold m-0">ID:</p>
+                <p class="displayID">
+                    <%= renderData.user_id %>
+                </p>
+            </div>
+            <div class="col d-flex align-items-center">
+                <a href="#change_id" class="btn btn-primary" data-toggle="modal">Change ID</a>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col border-bottom">
+                <p class="font-weight-bold">Citizen ID/Passport ID:</p>
+                <p class="displayCid">
+                    <%= renderData.user_cid %>
+                </p>
+            </div>
+            <div class="col d-flex align-items-center">
+                <a href="#change_cid" class="btn btn-primary" data-toggle="modal">Change citizen ID</a>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col border-bottom">
+                <p class="font-weight-bold">Gender:</p>
+                <p class="displayGender">
+                    <%= renderData.user_gender %>
+                </p>
+            </div>
+            <div class="col d-flex align-items-center">
+                <a href="#change_gender" class="btn btn-primary" data-toggle="modal">Change gender</a>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col border-bottom">
+                <p class="font-weight-bold">User Type:</p>
+                <p class="displayType">
+                    <%= renderData.user_type %>
+                </p>
+            </div>
+            <div class="col d-flex align-items-center">
+                <a href="#change_type" class="btn btn-primary" data-toggle="modal">Change type</a>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col border-bottom">
+                <p class="font-weight-bold">User Role:</p>
+                <p class="displayType">
+                    <%= renderData.user_role %>
+                </p>
+            </div>
+            <div class="col d-flex align-items-center">
+                <a href="#change_role" class="btn btn-primary" data-toggle="modal">Change role</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ID Modal-->
+<div class="modal fade" id="change_id">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please fill new ID</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <from>
+                    <h3>Whoa, There!</h3>
+                    <p>Once you change this user id, user will not be able to login the system using old id.<br>
+                        Please make sure that you want to do this.<br>
+                        If you are certain, please type new user ID and user current citizen ID to process</p>
+                    <label for="new_id">New ID:</label>
+                    <input type="text" placeholder="Enter new id" id="new_id" name="new_id" class="form-control">
+                    <label for="new_id">User current citizen ID:</label>
+                    <input type="text" placeholder="Enter current citizen ID" id="cur_cid" name="cur_cid"
+                        class="form-control">
+                </from>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnId">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- CID Modal-->
+<div class="modal fade" id="change_cid">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please fill new citizen ID</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <from>
+                    <h3>Whoa, There!</h3>
+                    <p>Citizen ID is not something that frequently change!<br>
+                        Please make ABSOULUTELY SURE that you want to do this.<br>
+                        If you are certain, please type current user ID and new user citizen ID to process</p>
+                    <label for="cur_id2">Current user ID:</label>
+                    <input type="text" placeholder="Enter current id" id="cur_id2" name="cur_id2" class="form-control">
+                    <label for="new_cid">New Citizen ID:</label>
+                    <input type="text" placeholder="Enter new cid" id="new_cid" name="new_cid" class="form-control">
+                </from>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnCid">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Gender Modal-->
+<div class="modal fade" id="change_gender">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please select new gender</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <from>
+                    <h3>Whoa, There!</h3>
+                    <p>You are trying to change user gender.<br>
+                        Please make sure that you want to do this.<br>
+                        If you are certain, please type user ID again for confirmation</p>
+                    <label for="cur_id3">Current user ID:</label>
+                    <input type="text" placeholder="Enter current id" id="cur_id3" name="cur_id3" class="form-control">
+                    <label for="new_gender">New Gender:</label>
+                    <select class="form-control" id="new_gender" name="new_gender" class="form-control">
+                        <option>Male</option>
+                        <option>Female</option>
+                    </select>
+                </from>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnGender">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Type Modal-->
+<div class="modal fade" id="change_type">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please select new type</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <from>
+                    <h3>Whoa, There!</h3>
+                    <p>You are trying to change user type.<br>
+                        Please make sure that you want to do this.<br>
+                        If you are certain, please type user ID again for confirmation</p>
+                    <label for="cur_id4">Current user ID:</label>
+                    <input type="text" placeholder="Enter current id" id="cur_id4" name="cur_id4" class="form-control">
+                    <label for="new_type">New Type:</label>
+                    <select class="form-control" id="new_type" name="new_type" class="form-control">
+                        <option>Student</option>
+                        <option>Personnel</option>
+                    </select>
+                </from>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnType">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Role Modal-->
+<div class="modal fade" id="change_role">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Please select new role</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <from>
+                    <h3>Whoa, There!</h3>
+                    <p>You are trying to change user role and privilege of the system.<br>
+                        Please make sure that you want to do this.<br>
+                        If you are certain, please type user ID again for confirmation</p>
+                    <label for="cur_id5">Current user ID:</label>
+                    <input type="text" placeholder="Enter current id" id="cur_id5" name="cur_id5" class="form-control">
+                    <label for="new_role">New role:</label>
+                    <select class="form-control" id="new_role" name="new_role" class="form-control">
+                        <option>user</option>
+                        <option>admin</option>
+                    </select>
+                </from>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnRole">Confirm</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

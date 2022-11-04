@@ -1,0 +1,71 @@
+<!--Header-->
+<div class="container-fluid text-center text-white font-weight-bold py-3 mb-3" id="banner">
+    <h1>Create Article</h1>
+</div>
+<div class="container-fluid">
+    <form>
+        <div class="form-group">
+            <p class="lead">Upload article cover image</p>
+            <label for="artcover">File number limit: 1 Single file/ size limit: 5MB /Allowed file types:
+                Image.jpg</label>
+            <input type="file" class="form-control-file" id="artcover" enctype="multipart/form-data" name="cover"
+                accept="image/png, image/jpg, image/jpeg" />
+        </div>
+        <button type="button" class="btn btn-primary" id="upload">Upload</button>
+        <div id="uploadresult"></div>
+        <div class="form-group">
+            <label for="art_title">Title:</label>
+            <input type="text" class="form-control" placeholder="Enter article title" id="art_title" name="art_title">
+        </div>
+        <div class="form-group">
+            <label for="art_body">Body:</label>
+            <textarea class="form-control" placeholder="Enter article text body" id="art_body" name="art_body" rows="10"
+                maxlength="5000"></textarea>
+        </div>
+        <!--
+        <div class="form-group">
+            <label for="art_noti">Notify this article to all user?</label>
+            <select type="text" class="form-control" id="art_noti" name="art_noti">
+                <option>no</option>
+                <option>yes</option>
+            </select>
+        </div>
+        -->
+        <button type="button" class="btn btn-primary" id="art">Create</button>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+        const title = document.getElementById('art_title')
+        const body = document.getElementById('art_body')
+        const noti = document.getElementById('art_noti')
+        const btnart = document.getElementById('art')
+        const btnupload = document.getElementById('upload')
+        //upload image
+        btnupload.addEventListener("click", async (e) => {
+            e.preventDefault();
+            var formData = new FormData();
+            var imagefile = document.querySelector('#artcover');
+            formData.append('cover', imagefile.files[0]);
+            axios.post('/article/cover', formData).then((response) => {
+                console.log(response.data)
+                alert(response.data)
+            });
+        });
+        //create article
+        btnart.addEventListener("click", async (e) => {
+            e.preventDefault();
+            const art_title = title.value;
+            const art_body = body.value;
+            axios.post('/article/artcreate', {
+                art_title: art_title,
+                art_body: art_body,
+            }).then((response) => {
+                console.log(response.data)
+                alert(response.data);
+                window.location.reload();
+            });
+        });
+    });
+</script>
